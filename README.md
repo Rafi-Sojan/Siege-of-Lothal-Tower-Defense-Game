@@ -1,138 +1,116 @@
-# 🏹 Tower Defense Game
+# Siege of Lothal - Tower Defense
 
-A **tower defense game** built using **C++17** and **SFML**, focusing on real-time gameplay, enemy movement, and basic tower mechanics.
+A C++17 tower-defense game built with SFML. Defend the castle against enemy waves by placing towers, following enemy paths, and upgrading your defenses.
 
----
+## Features
 
-## 🎮 Overview
+- Tower placement and inventory system
+- Enemy waves with path-following movement
+- Tower upgrades and upgrade branches
+- Tiled orthogonal map rendering
+- Mouse-based interaction and real-time rendering
+- Project-local textures, fonts, map, and tileset assets
+- No bundled music or other audio files
 
-This project is a standalone implementation of a tower defense game where the player defends against enemy waves by placing towers strategically on a map.
+## Screenshots
 
-It demonstrates core game development concepts such as:
+### Gameplay
 
-* Game loop design
-* Real-time rendering
-* Input handling
-* Basic enemy movement and interactions
+![Gameplay screen](screenshots/game-screen.png)
 
----
+### Main menu
 
-## ✨ Features
+![Main menu screen](screenshots/play-window.png)
 
-* 🛡️ Tower placement system
-* 👾 Enemy movement and path-following
-* 🎯 Real-time rendering using SFML
-* 🖱️ Mouse-based interaction
-* 🧱 Basic game architecture using C++
+## Technology
 
----
+- C++17
+- Visual Studio 2022
+- SFML 3
+- tmxlite
+- TGUI and pugixml project dependencies
 
----
+## Getting Started
 
-## ⚙️ Tech Stack
+### Prerequisites
 
-* **Language:** C++17
-* **Graphics Library:** SFML
+- Windows 10 or later
+- Visual Studio 2022 with the Desktop development with C++ workload
+- SFML 3 and the other dependencies configured for the project
 
----
+The Visual Studio project currently references dependency folders under `C:\Libraries`. If those dependencies are installed elsewhere, update the include and library paths in the project properties.
 
-## 🚀 Getting Started
-
-### 🔧 Prerequisites
-
-* C++17 compatible compiler
-* SFML installed and configured
-* Visual Studio (recommended for this project)
-
----
-
-### 🪟 Running the Project (Visual Studio)
+### Build and Run
 
 1. Clone the repository:
 
-```bash id="2yh5tz"
-git clone https://github.com/Rafi-Sojan/Tower-Defense-Game.git
+```bash
+git clone https://github.com/Rafi-Sojan/Siege-of-Lothal-Tower-Defense-Game.git
 ```
 
-2. Open the solution file (`.sln`) in Visual Studio
+2. Open `tower-defense-main/tower-defense-main.sln` in Visual Studio.
 
-3. Make sure SFML is properly linked:
+3. Select `Release` and `x64`.
 
-   * Include directories
-   * Library directories
-   * DLLs available at runtime
+4. Build and run the solution.
 
-4. Build and run the project
+The project copies the `assets/` folder to the build output automatically. Runtime assets are loaded from paths such as `assets/maps/map-final-2.tmx` and `assets/textures/`.
 
----
+## Controls
 
-## 🎮 Controls
+| Action | Input |
+| --- | --- |
+| Place or interact with towers | Left mouse button |
+| Open inventory | `L` |
+| Open tower upgrade window | Right mouse button on a tower |
+| Choose upgrade branch | `1`, `2`, or `3` |
+| Close the current panel | `Escape` or `P` where applicable |
+| Zoom in | `I` |
+| Zoom out or reset zoom | `O` |
+| Open settings screen | `Z` |
+| Close settings screen | `M` |
 
-| Action          | Input       |
-| --------------- | ----------- |
-| Place Tower     | Left Click  |
-| Toggle Tower    |     L       |   
-| Upgrade window  | Right Click |
-| Interact        | Mouse       |
+## Project Structure
 
----
-
-## 📁 Project Structure
-
-```id="4jqdhh"
+```text
 Tower-Defense-Game/
-│
-├── tower-defense-main/
-│   ├── tower-defense-main.sln
-│   └── tower-defense-main/
-│       ├── game-main.cpp
-│       ├── SFMLOrthogonalLayer.hpp
-│       ├── *.vcxproj
-│       └── assets/
-│           ├── fonts/
-│           ├── maps/
-│           ├── textures/
-│           └── tilesets/
+├── .gitignore
+├── .gitattributes
 ├── README.md
-└── .gitattributes
+├── screenshots/
+│   ├── game-screen.png
+│   └── play-window.png
+└── tower-defense-main/
+    ├── tower-defense-main.sln
+    └── tower-defense-main/
+        ├── game-main.cpp
+        ├── SFMLOrthogonalLayer.hpp
+        ├── game.rc
+        ├── resource.h
+        ├── tower-defense-main.vcxproj
+        └── assets/
+            ├── fonts/
+            ├── maps/
+            ├── textures/
+            └── tilesets/
 ```
 
----
+Generated Visual Studio caches, build outputs, and distribution packages are excluded by `.gitignore`.
 
-## 🧠 Notes
+## Publishing a Windows Package
 
-* This project is currently structured around a **Visual Studio solution**
-* Some files (e.g., `.vcxproj`, `.filters`) are IDE-specific
-* Asset paths are project-local and copied to the build output by Visual Studio
+Build the `Release | x64` configuration, then distribute the ZIP package containing:
 
----
+- `tower-defense-main.exe`
+- Required SFML runtime DLLs
+- The complete `assets/` folder
 
-## 🚧 Future Improvements
+The generated package is placed under `dist/` locally and is ignored by Git.
 
-* Cross-platform support (Linux/Ubuntu)
-* Advanced enemy AI
-* Tower upgrades and abilities
-* Improved UI and game polish
+## License and Asset Credits
 
----
+No software license is currently included. Confirm the licenses or permissions for all third-party graphics, fonts, and other assets before redistributing the game.
 
-## 🤝 Contributing
+## Author
 
-Feel free to fork the repository and improve the project.
-
----
-
-## 📜 License
-
-No license specified yet.
-
----
-
-## 👤 Author
-
-**Rafi Sojan**
-
----
-
-
----
+Rafi Sojan

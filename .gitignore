@@ -1,0 +1,39 @@
+# Visual Studio user data and caches
+.vs/
+*.suo
+*.user
+
+# Build output directories
+**/Debug/
+**/Release/
+**/x64/
+**/Win32/
+
+# Generated build files
+*.obj
+*.pdb
+*.ilk
+*.tlog
+*.idb
+*.res
+*.lib
+*.exp
+*.recipe
+*.log
+*.lastbuildstate
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.ipch
+
+# Compiled binaries
+*.exe
+*.dll
+
+# Local distribution packages
+dist/
+
+# Keep project assets under version control
+!**/assets/
+!**/assets/**

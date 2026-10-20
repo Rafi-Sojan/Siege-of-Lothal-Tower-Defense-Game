@@ -77,20 +77,24 @@ git clone https://github.com/Rafi-Sojan/Tower-Defense-Game.git
 
 ---
 
-## 📁 Project Structure (Current)
+## 📁 Project Structure
 
 ```id="4jqdhh"
 Tower-Defense-Game/
 │
-├── Tower Defense Game/   # Main Visual Studio project folder
-│   ├── Source.cpp        # Main source file
-│   ├── *.vcxproj         # Project configuration
-│   ├── *.filters
-│   └── assets
-│
-├── Tower-Defense-Game.sln
+├── tower-defense-main/
+│   ├── tower-defense-main.sln
+│   └── tower-defense-main/
+│       ├── game-main.cpp
+│       ├── SFMLOrthogonalLayer.hpp
+│       ├── *.vcxproj
+│       └── assets/
+│           ├── fonts/
+│           ├── maps/
+│           ├── textures/
+│           └── tilesets/
 ├── README.md
-└── .gitignore
+└── .gitattributes
 ```
 
 ---
@@ -99,13 +103,12 @@ Tower-Defense-Game/
 
 * This project is currently structured around a **Visual Studio solution**
 * Some files (e.g., `.vcxproj`, `.filters`) are IDE-specific
-* Future improvements may include restructuring for cross-platform builds
+* Asset paths are project-local and copied to the build output by Visual Studio
 
 ---
 
 ## 🚧 Future Improvements
 
-* Better project structure (separating source and assets)
 * Cross-platform support (Linux/Ubuntu)
 * Advanced enemy AI
 * Tower upgrades and abilities

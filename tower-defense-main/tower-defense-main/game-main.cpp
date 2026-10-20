@@ -1,5 +1,4 @@
 ﻿#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <tmxlite/Map.hpp>
 #include <tmxlite/ObjectGroup.hpp>
 #include "SFMLOrthogonalLayer.hpp"
@@ -149,18 +148,6 @@ struct Enemy
     }
 };
 
-struct VolumeSlider
-{
-    sf::RectangleShape track;
-    sf::CircleShape knob;
-
-    float minX;
-    float maxX;
-    float value; 
-    bool dragging = false;
-};
-
-
 struct Tower
 {
     sf::Sprite sprite;
@@ -261,10 +248,10 @@ int main()
     sf::Clock consoleClock;
 
     sf::Font font;
-    font.openFromFile("D:/AI PROJECTS/C++/seige-of-lothal-main/x64/Debug/DejaVuSans.ttf");
+    font.openFromFile("assets/fonts/DejaVuSans.ttf");
 
     tmx::Map map;
-    map.load("C:/Users/Rafi Sojan S/Downloads/map-final-2..tmx");
+    map.load("assets/maps/map-final-2.tmx");
 
     sf::Text coinText(font);
     coinText.setCharacterSize(20);
@@ -280,14 +267,14 @@ int main()
     mapView.setCenter(sf::Vector2f{ 960.f, 540.f });
 
     sf::Texture backgroundimage;
-    if (!backgroundimage.loadFromFile("C:/Users/Rafi Sojan S/Downloads/war-field-in-digital-alam6alejuznqq6t.jpg")) {
+    if (!backgroundimage.loadFromFile("assets/textures/war-field-in-digital-alam6alejuznqq6t.jpg")) {
         std::cerr << "failed" << std::endl;
         return EXIT_FAILURE;
     }
 
     sf::Texture towerTex, enemyTex;
-    towerTex.loadFromFile("C:/Users/Rafi Sojan S/Downloads/Archer-Upgrade-3-ezgif.com-crop.png");
-    enemyTex.loadFromFile("C:/Users/Rafi Sojan S/Downloads/free-archer-towers-pixel-art-for-tower-defense/3 Units/1/U_Preattack.png");
+    towerTex.loadFromFile("assets/textures/Archer-Upgrade-3-ezgif.com-crop.png");
+    enemyTex.loadFromFile("assets/textures/U_Preattack.png");
 
 
     std::vector<Path> paths;
@@ -374,33 +361,6 @@ int main()
     restartText.setString("Press R to Restart\nPress ESC to Quit");
     restartText.setCharacterSize(28);
     restartText.setPosition({ 650.f, 460.f });
-
-    VolumeSlider volumeSlider;
-
-    
-    volumeSlider.track.setSize({ 300.f, 6.f });
-    volumeSlider.track.setFillColor(sf::Color(180, 180, 180));
-    volumeSlider.track.setPosition({ 810.f, 380.f });
-
-   
-    volumeSlider.knob.setRadius(10.f);
-    volumeSlider.knob.setOrigin({ 10.f, 10.f });
-    volumeSlider.knob.setFillColor(sf::Color::White);
-    volumeSlider.knob.setPosition({ 960.f, 383.f });
-
-    
-    volumeSlider.minX = volumeSlider.track.getPosition().x;
-    volumeSlider.maxX = volumeSlider.minX + volumeSlider.track.getSize().x;
-
-    
-    volumeSlider.value = 50.f;
-
-
-    sf::Music bgMusic;
-    bgMusic.openFromFile("C:/Users/Rafi Sojan S/Downloads/19. The End.ogg");
-    bgMusic.setLooping(true);
-    bgMusic.play();
-    bgMusic.setVolume(volumeSlider.value);
 
     UpgradeUI upgradeUI(font);
     upgradeUI.panel.setSize(sf::Vector2f{ 260.f, 180.f });
@@ -579,26 +539,6 @@ int main()
                 }
             }
 
-            if (states.top() == GameState::Settings)
-            {
-                if (auto m = ev->getIf<sf::Event::MouseButtonPressed>())
-                {
-                    sf::Vector2f mouse =
-                        window.mapPixelToCoords(m->position, window.getDefaultView());
-
-                    if (volumeSlider.knob.getGlobalBounds().contains(mouse))
-                    {
-                        volumeSlider.dragging = true;
-                    }
-                }
-
-                if (ev->getIf<sf::Event::MouseButtonReleased>())
-                {
-                    volumeSlider.dragging = false;
-                }
-            }
-        
-        
             if (auto k = ev->getIf<sf::Event::KeyPressed>())
             {
                 sf::Vector2f size_updation = mapView.getSize();
@@ -1012,39 +952,6 @@ int main()
             window.draw(backText);
 
         }
-
-        if (states.top() == GameState::Settings && volumeSlider.dragging)
-        {
-            float mouseX =
-                window.mapPixelToCoords(
-                    sf::Mouse::getPosition(window),
-                    window.getDefaultView()
-                ).x;
-
-            mouseX = std::clamp(mouseX,
-                volumeSlider.minX,
-                volumeSlider.maxX);
-
-            volumeSlider.knob.setPosition(
-                { mouseX, volumeSlider.knob.getPosition().y }
-            );
-
-            float percent =
-                (mouseX - volumeSlider.minX) /
-                (volumeSlider.maxX - volumeSlider.minX);
-
-            volumeSlider.value = percent * 100.f;
-
-            bgMusic.setVolume(volumeSlider.value);
-        }
-
-        if (states.top() == GameState::Settings)
-        {
-            window.draw(volumeSlider.track);
-            window.draw(volumeSlider.knob);
-        }
-
-
 
         window.display();
 
